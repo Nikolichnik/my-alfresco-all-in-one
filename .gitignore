@@ -1,4 +1,4 @@
-# Java kompajlirane klase:
+# Java compiled classes:
 *.class
-# Output direktorij s rezultatima kompajliranja i builda:
+# Target folder:
 target/*
