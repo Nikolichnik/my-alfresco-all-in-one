@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Definition of new Model -->
+<model name="ba:bandModel" xmlns="http://www.alfresco.org/model/dictionary/1.0">
+    <!-- Optional meta-data about the model -->
+    <description>Band Model</description>
+    <author>Nikolichnik</author>
+    <version>1.0</version>
+
+    <!-- Imports are required to allow references to definitions in other models -->
+    <imports>
+        <!-- Import Alfresco Dictionary Definitions -->
+        <import uri="http://www.alfresco.org/model/dictionary/1.0" prefix="d" />
+        <!-- Import Alfresco Content Domain Model Definitions -->
+        <import uri="http://www.alfresco.org/model/content/1.0" prefix="cm" />
+    </imports>
+
+    <!-- Introduction of new namespaces defined by this model -->
+    <namespaces>
+        <namespace uri="http://www.nikolichnik.com/model/content/1.0" prefix="gu" />
+        <namespace uri="http://www.nikolichnik.com/model/content/2.0" prefix="ba" />
+    </namespaces>
+    <constraints>
+        <constraint name="ba:stringsConstraint" type="MINMAX">            
+            <parameter name='minValue'><value>1</value></parameter>
+            <parameter name='maxValue'><value>30</value></parameter>
+        </constraint>
+        <constraint name="ba:scaleConstraint" type="MINMAX">            
+            <parameter name='minValue'><value>10</value></parameter>
+            <parameter name='maxValue'><value>50</value></parameter>
+        </constraint>
+        <constraint name="ba:materialConstraint" type="LIST">            
+            <parameter name='allowedValues'>
+                <list>
+                    <value>Spruce</value>
+                    <value>Cedar</value>
+                    <value>Maple</value>
+                    <value>Cherry</value>
+                    <value>Mahagony</value>
+                    <value>Rosewood</value>
+                    <value>Ebony</value>
+                    <value>Other</value>
+                </list>
+            </parameter>
+            <parameter name='caseSensitive'>
+                <value>true</value>
+            </parameter>
+        </constraint>
+        <constraint name="ba:pickupTypeConstraint" type="LIST">            
+            <parameter name='allowedValues'>
+                <list>
+                    <value>Single coil</value>
+                    <value>Humbucker</value>                 
+                    <value>Piezo</value>                 
+                    <value>Microphone</value>                 
+                    <value>Other</value>                 
+                </list>
+            </parameter>
+            <parameter name='caseSensitive'>
+                <value>true</value>
+            </parameter>
+        </constraint>
+        <constraint name="ba:electricTypeConstraint" type="LIST">            
+            <parameter name='allowedValues'>
+                <list>
+                    <value>Stratocaster</value>
+                    <value>Telecaster</value>                    
+                    <value>Jazzmaster</value>                    
+                    <value>Mustang</value>                    
+                    <value>Les Paul</value>                    
+                    <value>SG</value>                    
+                    <value>Other</value>                    
+                </list>
+            </parameter>
+            <parameter name='caseSensitive'>
+                <value>true</value>
+            </parameter>
+        </constraint>
+        <constraint name="ba:bassTypeConstraint" type="LIST">            
+            <parameter name='allowedValues'>
+                <list>                                    
+                    <value>P-Bass</value>                    
+                    <value>Jazz Bass</value>                    
+                    <value>Precision Bass</value>                    
+                    <value>Violin Bass</value>                    
+                    <value>Other</value>                    
+                </list>
+            </parameter>
+            <parameter name='caseSensitive'>
+                <value>true</value>
+            </parameter>
+        </constraint>
+    </constraints>
+
+    <types>
+        <type name="ba:band">
+            <title>Band</title>
+            <parent>cm:content</parent>
+            <properties>
+                <property name="ba:bandName">
+                    <title>Band name</title>
+                    <type>d:text</type>
+                    <multiple>false</multiple>
+                </property>
+                <property name="ba:numberOfMembers">
+                    <title>Number of members</title>
+                    <type>d:int</type>
+                    <multiple>false</multiple>
+                </property>           
+            </properties>
+            <associations>
+                <association name="ba:guitars">
+                    <title>Guitar players</title>
+                    <source>
+                        <mandatory>false</mandatory>
+                        <many>true</many>
+                    </source>
+                    <target>
+                        <class>ba:guitar</class>
+                        <mandatory>false</mandatory>
+                        <many>true</many>
+                    </target>
+                </association>
+            </associations>
+        </type>
+
+        <type name="ba:manager">
+            <title>Band</title>
+            <parent>cm:content</parent>
+            <properties>
+                <property name="ba:name">
+                    <title>Manager name</title>
+                    <type>d:text</type>
+                    <multiple>false</multiple>
+                </property>
+                <property name="ba:surname">
+                    <title>Manager last name</title>
+                    <type>d:text</type>
+                    <multiple>true</multiple>
+                </property>           
+            </properties>
+            <associations>
+                <child-association name="ba:managedBands">
+                    <title>Managed bands</title>
+                    <source>
+                        <mandatory>false</mandatory>
+                        <many>false</many>
+                    </source>
+                    <target>
+                        <class>ba:band</class>
+                        <mandatory>false</mandatory>
+                        <many>true</many>
+                    </target>
+                    <duplicate>false</duplicate>
+                    <propagateTimestamps>true</propagateTimestamps>
+                </child-association>
+            </associations>
+        </type>
+
+        <type name="ba:guitar">
+            <title>Guitar</title>
+            <parent>cm:content</parent>
+            <properties>
+                <property name="ba:playerName">
+                    <title>Name of the player</title>
+                    <type>d:text</type>
+                    <multiple>false</multiple>                    
+                </property>
+                <property name="ba:stringsNumber">
+                    <title>Number of strings</title>
+                    <type>d:int</type>
+                    <multiple>false</multiple>
+                    <constraints>
+                        <constraint ref="ba:stringsConstraint" />
+                    </constraints>
+                </property>
+                <property name="ba:scaleLength">
+                    <title>Scale length</title>
+                    <type>d:double</type>
+                    <multiple>true</multiple>
+                    <constraints>
+                        <constraint ref="ba:scaleConstraint" />
+                    </constraints>
+                </property>
+                <property name="ba:neckMaterial">
+                    <title>Neck material</title>
+                    <type>d:text</type>
+                    <multiple>false</multiple>
+                    <constraints>
+                        <constraint ref="ba:materialConstraint" />
+                    </constraints>
+                </property>                
+            </properties>
+
+            <mandatory-aspects>
+                <aspect>cm:generalclassifiable</aspect>
+            </mandatory-aspects>
+        </type>
+
+        <type name="ba:acousticGuitar">
+            <title>Acoustic guitar</title>
+            <parent>ba:guitar</parent>
+            <properties>
+                <property name="ba:top">
+                    <title>Top material</title>
+                    <type>d:text</type>
+                    <multiple>false</multiple>
+                    <constraints>
+                        <constraint ref="ba:materialConstraint" />
+                    </constraints>
+                </property>   
+                <property name="ba:sides">
+                    <title>Sides material</title>
+                    <type>d:text</type>
+                    <multiple>false</multiple>
+                    <constraints>
+                        <constraint ref="ba:materialConstraint" />
+                    </constraints>
+                </property>   
+                <property name="ba:back">
+                    <title>Back material</title>
+                    <type>d:text</type>
+                    <multiple>false</multiple>
+                    <constraints>
+                        <constraint ref="ba:materialConstraint" />
+                    </constraints>
+                </property>              
+            </properties>
+            <mandatory-aspects>
+                <aspect>ba:acousticity</aspect>
+            </mandatory-aspects>
+        </type>
+
+        <type name="ba:electricGuitar">
+            <title>Electric guitar</title>
+            <parent>ba:guitar</parent>
+            <properties>
+                <property name="ba:electricGuitarType">
+                    <title>Type</title>
+                    <type>d:text</type>
+                    <multiple>false</multiple>
+                    <constraints>
+                        <constraint ref="ba:electricTypeConstraint" />
+                    </constraints>
+                </property>
+            </properties>
+            <mandatory-aspects>
+                <aspect>ba:pickups</aspect>
+            </mandatory-aspects> 
+        </type>
+
+        <type name="ba:bass">
+            <title>Bass guitar</title>
+            <parent>ba:guitar</parent>
+            <properties>
+                <property name="ba:bassGuitarType">
+                    <title>Number of strings</title>
+                    <type>d:text</type>
+                    <multiple>false</multiple>
+                    <constraints>
+                        <constraint ref="ba:bassTypeConstraint" />
+                    </constraints>
+                </property>
+            </properties>
+            <mandatory-aspects>
+                <aspect>ba:pickups</aspect>
+            </mandatory-aspects> 
+        </type>
+
+    </types>
+
+    <aspects>
+        <aspect name="ba:pickups">
+            <title>Pickups</title>
+            <properties>
+                <property name="ba:pickupType">
+                    <title>Type of pickups</title>
+                    <type>d:text</type>
+                    <multiple>true</multiple>
+                    <constraints>
+                        <constraint ref="ba:pickupTypeConstraint" />
+                    </constraints>
+                </property>
+                <property name="ba:isActive">
+                    <title>Pickups are active</title>
+                    <type>d:boolean</type>
+                    <default>false</default>
+                </property>
+            </properties>
+        </aspect>
+
+        <aspect name="ba:acousticity">
+            <title>Has acoustic aspects</title>
+        </aspect>
+        
+    </aspects>
+</model>

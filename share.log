@@ -1,0 +1,13 @@
+2018-11-09 10:01:25,412 INFO  [org.alfresco.web.config.packaging.ModulePackageManager] [localhost-startStop-1] Found 1 module package(s)
+2018-11-09 10:01:25,414 INFO  [org.alfresco.web.config.packaging.ModulePackageManager] [localhost-startStop-1] Alfresco Share JAR Module, 1.0-SNAPSHOT, Sample Share JAR Module (to be included in the share.war) - part of AIO - SDK 3
+
+2018-11-09 10:01:25,703 INFO  [org.springframework.extensions.webscripts.TemplateProcessorRegistry] [localhost-startStop-1] Registered template processor freemarker for extension ftl
+2018-11-09 10:01:25,705 INFO  [org.springframework.extensions.webscripts.ScriptProcessorRegistry] [localhost-startStop-1] Registered script processor javascript for extension js
+2018-11-09 10:01:25,705 INFO  [org.springframework.extensions.webscripts.TemplateProcessorRegistry] [localhost-startStop-1] Registered template processor freemarker for extension ftl
+2018-11-09 10:01:25,706 INFO  [org.springframework.extensions.webscripts.ScriptProcessorRegistry] [localhost-startStop-1] Registered script processor javascript for extension js
+2018-11-09 10:01:28,819 INFO  [org.springframework.extensions.webscripts.DeclarativeRegistry] [localhost-startStop-1] Registered 393 Web Scripts (+0 failed), 411 URLs
+2018-11-09 10:01:28,820 INFO  [org.springframework.extensions.webscripts.DeclarativeRegistry] [localhost-startStop-1] Registered 8 Package Description Documents (+0 failed) 
+2018-11-09 10:01:28,821 INFO  [org.springframework.extensions.webscripts.DeclarativeRegistry] [localhost-startStop-1] Registered 0 Schema Description Documents (+0 failed) 
+2018-11-09 10:01:28,860 INFO  [org.springframework.extensions.webscripts.AbstractRuntimeContainer] [localhost-startStop-1] Initialised Surf Container Web Script Container (in 3134.2004ms)
+2018-11-09 10:01:28,861 INFO  [org.springframework.extensions.webscripts.TemplateProcessorRegistry] [localhost-startStop-1] Registered template processor freemarker for extension ftl
+2018-11-09 10:01:28,862 INFO  [org.springframework.extensions.webscripts.ScriptProcessorRegistry] [localhost-startStop-1] Registered script processor javascript for extension js
